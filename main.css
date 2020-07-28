@@ -1,0 +1,104 @@
+body {
+  width: 100%;
+  max-width: 800px;
+  margin: 1em auto;
+  background-color: white;
+  display: block;
+  font-family: sans-serif;
+  font-size: 10px;
+}
+
+.header {
+  width: 100%;
+  max-width: 800px;
+  font-family: 'Chonburi', sans-serif;
+  font-size: 4em;
+  margin: 1em auto 0.5em auto;
+  text-align: center;
+  color: rgb(235, 48, 124);
+}
+.header .back {
+  margin-top: -0.6em;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+img {
+  display: none;
+}  
+canvas {
+  width: 100%;
+  max-width: 800px;
+}
+canvas.intermediate {
+  width: 33%;
+  max-width: 266px;
+}
+#text {
+  width: 100%;
+  max-width: 800px;
+  font-family: 'Chonburi', sans-serif;
+  font-size: 4em;
+  text-align: center;
+  color: rgb(235, 48, 124);
+}
+
+input#file {
+  width: 200px;
+} 
+
+.buttons {
+  margin: 1em auto;
+  width: 280px;
+  /* text-align: center; */
+}
+.button {
+  display: inline-block;
+  padding: 0.5em;
+  text-align: center;
+  font-size: 1em;
+  background-color: white;
+  border: 1px solid rgb(235, 48, 124);
+  color: rgb(235, 48, 124);
+}
+.button:hover {
+  background-color: rgb(235, 48, 124);
+  color: white;
+  cursor: pointer;
+}
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.center {
+	text-align: center;
+}
+.logo {
+  position: relative;
+  display: inline-block;
+  height: 50px;
+  line-height: 50px;
+  vertical-align: middle;
+  background-size: cover;
+  background-repeat:no-repeat;
+  background-position: center center;
+}
+.logo a span {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.boonmeelab {
+  background-image: url('logo_boonmeelab.png');
+  width: 150px;
+  margin: 0 -10px;
+}

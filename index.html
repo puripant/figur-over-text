@@ -1,0 +1,65 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- for Google -->
+  <meta name="description" content="figur over text" />
+  <meta name="keywords" content="sketch, canvas, opencv, image processing, graphics, text, typography, design, computer vision, grabcut" />
+  <meta name="author" content="Puripant Ruchikachorn" />
+
+  <!-- for Facebook -->
+  <meta property="og:title" content="figur over text" />
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://puripant.ruchikachorn.com/figur-over-text/screenshot.png" />
+  <meta property="og:url" content="http://puripant.ruchikachorn.com/figur-over-text/" />
+  <meta property="og:description" content="Prototype of image/figure foreground over custom text" />
+
+  <!-- for Twitter -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="figur over text" />
+  <meta name="twitter:description" content="Prototype of image/figure foreground over custom text" />
+  <meta name="twitter:image" content="http://puripant.ruchikachorn.com/figur-over-text/screenshot.png" />
+
+  <title>figur over text</title>
+  <link href="main.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Chonburi" rel="stylesheet">
+</head>
+
+<body>
+  <div class="header">
+    <div class="front">figur</div>
+    <div class="back">text</div>
+  </div>
+  
+  <div class="buttons">
+    Upload a file: 
+    <input type="file" id="file" name="file" disabled />
+  </div>
+  <div class="buttons">
+    Choose an option: 
+    <div class="button noselect" onclick="update('grabcut')">GrabCut</div>
+    <!-- <div class="button noselect" onclick="update('removebg')">remove.bg</div>
+    <div class="button noselect" onclick="update('bodypix')">bodypix</div>
+    <div class="button noselect" onclick="update('maskrcnn')">Mask RCNN</div> -->
+  </div>
+  <img id="image" />
+
+  <canvas id="background"></canvas>
+  <div id="text">i run therefore i am</div>
+  <canvas id="foreground"></canvas>
+  <!-- <canvas class="intermediate" id="input"></canvas>
+  <canvas class="intermediate" id="canny"></canvas>
+  <canvas class="intermediate" id="lines"></canvas> -->
+
+  <div class="buttons center">
+    Code at <a href="https://github.com/puripant/figur-over-text">GitHub</a>
+    <br>
+		Created by
+    <div class="logo boonmeelab"><a href="https://www.boonmeelab.com"><span></span></a></div>
+  </div>
+
+  <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
+  <script src="main.js"></script>
+</body>
+</html>
