@@ -116,6 +116,24 @@ canvas.addEventListener('touchstart', function(e) {
 	startY = e.touches[0].clientY - bound.top;
   endX = e.touches[1].clientX - bound.left;
 	endY = e.touches[1].clientY - bound.top;
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.rect(startX, startY, endX, endY);
+  ctx.stroke();
+}, false);
+canvas.addEventListener('touchmove', function(e) {
+  if (isDrawing) {
+		startX = e.touches[0].clientX - bound.left;
+    startY = e.touches[0].clientY - bound.top;
+    endX = e.touches[1].clientX - bound.left;
+    endY = e.touches[1].clientY - bound.top;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.beginPath();
+    ctx.rect(startX, startY, endX, endY);
+    ctx.stroke();
+	}
 }, false);
 canvas.addEventListener('touchend', function(e) {
   isDrawing = false;
