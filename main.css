@@ -37,7 +37,7 @@ canvas {
   max-width: 500px;
   height: 100%;
 }
-#background, #foreground, #text {
+#background, #foreground, #text, #ui {
   position: absolute;
   top: 0;
 }
@@ -48,6 +48,7 @@ canvas {
   font-size: 4em;
   text-align: center;
   color: rgb(235, 48, 124);
+  padding: 0.5em 0;
 }
 
 input#file {

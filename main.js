@@ -8,11 +8,14 @@ let width, height;
 let imgElement = document.getElementById('image')
 imgElement.onload = () => {
   input = cv.imread('image');
-  // cv.imshow('background', input);
+  cv.imshow('background', input);
 
   width = Math.min(input.cols, maxWidth);
   height = Math.min(input.rows, width * input.rows / input.cols);
   cv.resize(input, input, new cv.Size(width, height), 0, 0, cv.INTER_AREA);
+
+  canvas.width = width;
+  canvas.height = height;
 
   src = input.clone();
   cv.resize(src, src, new cv.Size(width/scaling, height/scaling), 0, 0, cv.INTER_AREA);
@@ -29,7 +32,7 @@ inputElement.addEventListener('change', (e) => {
 function update(option) {
   switch(option) {
     case 'grabcut':
-      grabcut();
+      grabcut(0.25*width, 0, 0.5*width, height);
       break;
     case 'removebg': break;
     case 'bodypix': break;
@@ -37,15 +40,11 @@ function update(option) {
     default: break;
   }
 }
-function grabcut() {
+function grabcut(a, b, w, h) {
   let mask = new cv.Mat();
   let bgdModel = new cv.Mat();
   let fgdModel = new cv.Mat();
-  // let rect = new cv.Rect(100/scaling, 50/scaling, 200/scaling, 800/scaling); //running-man
-  // let rect = new cv.Rect(80/scaling, 50/scaling, 300/scaling, 800/scaling); //running-pair //bad result
-  // let rect = new cv.Rect(200/scaling, 0/scaling, 150/scaling, 800/scaling); //running-woman //bad result
-  let rect = new cv.Rect(80/scaling, 100/scaling, 320/scaling, 800/scaling); //workout
-  // let rect = new cv.Rect(50/scaling, 100/scaling, 400/scaling, 1000/scaling); //goongging
+  let rect = new cv.Rect(a/scaling, b/scaling, w/scaling, h/scaling);
   cv.grabCut(src, mask, rect, bgdModel, fgdModel, 2, cv.GC_INIT_WITH_RECT);
 
   dst = input.clone()
@@ -66,14 +65,43 @@ function grabcut() {
   mask.delete();
   bgdModel.delete();
   fgdModel.delete();
-
-  let color = new cv.Scalar(0, 0, 255);
-  let point1 = new cv.Point(rect.x*scaling, rect.y*scaling);
-  let point2 = new cv.Point(rect.x*scaling + rect.width*scaling, rect.y*scaling + rect.height*scaling);
-  cv.rectangle(input, point1, point2, color);
-  cv.imshow('background', input);
 }
 
 function onOpenCvReady() {
   inputElement.disabled = false;
 }
+
+let canvas = document.getElementById('ui');
+let ctx = canvas.getContext('2d');
+
+let isDrawing = false;
+let startX, startY, mouseX, mouseY;
+let bound;
+
+canvas.addEventListener('mousedown', function(e) {
+  isDrawing = true;
+  canvas.style.cursor = 'crosshair';		
+
+  bound = canvas.getBoundingClientRect();
+	startX = e.clientX - bound.left;
+	startY = e.clientY - bound.top;
+}, false);
+canvas.addEventListener('mousemove', function(e) {
+  if (isDrawing) {
+		mouseX = e.clientX - bound.left;
+		mouseY = e.clientY - bound.top;				
+		
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.beginPath();
+		ctx.rect(startX, startY, mouseX - startX, mouseY - startY);
+		ctx.stroke();
+	}
+}, false);
+canvas.addEventListener('mouseup', function(e) {
+  isDrawing = false;
+	canvas.style.cursor = 'default';
+
+  grabcut(Math.min(startX, mouseX - startX), Math.min(startY, mouseY - startY), 
+          Math.max(startX, mouseX - startX), Math.max(startY, mouseY - startY));
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}, false);

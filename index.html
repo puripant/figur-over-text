@@ -33,15 +33,18 @@
   </div>
   
   <div class="buttons">
-    Upload a file: 
+    Upload a photo: 
     <input type="file" id="file" name="file" disabled />
   </div>
-  <div class="buttons">
+  <!-- <div class="buttons">
     Choose an option: 
-    <div class="button noselect" onclick="update('grabcut')">GrabCut</div>
+    <div class="button noselect" onclick="update('grabcut')">GrabCut</div> -->
     <!-- <div class="button noselect" onclick="update('removebg')">remove.bg</div>
     <div class="button noselect" onclick="update('bodypix')">bodypix</div>
     <div class="button noselect" onclick="update('maskrcnn')">Mask RCNN</div> -->
+  <!-- </div> -->
+  <div class="buttons">
+    By default, 25% left and right of the photo are considered as background. Click and drag to select the area to pull the foreground out over the text. (All pixels outside of the rectangle are considered as background.) 
   </div>
   <img id="image" />
 
@@ -50,14 +53,15 @@
     <div id="text">สักวาหวานอื่นมีหมื่นแสน ไม่เหมือนแม้นพจมานที่หวานหอม กลิ่นประเทียบเปรียบดวงพวงพะยอม อาจจะน้อมจิตโน้มด้วยโลมลมแม้นล้อลามหยามหยาบไม่ปลาบปลื้ม ดังดูดดื่มบอระเพ็ดต้องเข็ดขม ผู้ดีไพร่ไม่ประกอบชอบอารมณ์ ใครฟังลมเมินหน้าระอาเอย</div>
     <!-- <div id="text">i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am </div> -->
     <canvas id="foreground"></canvas>
+    <canvas id="ui"></canvas>
   </div>
 
-  <div class="buttons center">
+  <!-- <div class="buttons center">
     Code at <a href="https://github.com/puripant/figur-over-text">GitHub</a>
     <br>
 		Created by
     <div class="logo boonmeelab"><a href="https://www.boonmeelab.com"><span></span></a></div>
-  </div>
+  </div> -->
 
   <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
   <script src="main.js"></script>
