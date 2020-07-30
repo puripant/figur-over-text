@@ -105,3 +105,23 @@ canvas.addEventListener('mouseup', function(e) {
           Math.max(startX, mouseX - startX), Math.max(startY, mouseY - startY));
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }, false);
+
+let endX, endY;
+canvas.addEventListener('touchstart', function(e) {
+  isDrawing = true;
+  canvas.style.cursor = 'crosshair';		
+
+  bound = canvas.getBoundingClientRect();
+	startX = e.touches[0].clientX - bound.left;
+	startY = e.touches[0].clientY - bound.top;
+  endX = e.touches[0].clientX - bound.left;
+	endY = e.touches[0].clientY - bound.top;
+}, false);
+canvas.addEventListener('touchend', function(e) {
+  isDrawing = false;
+	canvas.style.cursor = 'default';
+
+  grabcut(Math.min(startX, endX), Math.min(startY, endY), 
+          Math.max(startX, endX), Math.max(startY, endY));
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}, false);
