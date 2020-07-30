@@ -106,30 +106,31 @@ canvas.addEventListener('mouseup', function(e) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }, false);
 
-canvas.addEventListener('touchstart', function(e) {
-  isDrawing = true;
-  canvas.style.cursor = 'crosshair';		
-
+let endX, endY;
+canvas.addEventListener('touchstart', function(e) {	
   bound = canvas.getBoundingClientRect();
-	startX = e.touches[0].clientX - bound.left;
-	startY = e.touches[0].clientY - bound.top;
-}, false);
-canvas.addEventListener('touchmove', function(e) {
-  if (isDrawing) {
-    mouseX = e.touches[0].clientX - bound.left;
-		mouseY = e.touches[0].clientY - bound.top;				
-		
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
+  if (startX) {
+    endX = e.touches[0].clientX - bound.left;
+	  endY = e.touches[0].clientY - bound.top;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
-		ctx.rect(startX, startY, mouseX - startX, mouseY - startY);
+		ctx.rect(startX, startY, endX - startX, endY - startY);
 		ctx.stroke();
-	}
+  } else {
+	  startX = e.touches[0].clientX - bound.left;
+	  startY = e.touches[0].clientY - bound.top;
+  }
 }, false);
 canvas.addEventListener('touchend', function(e) {
-  isDrawing = false;
-	canvas.style.cursor = 'default';
+  if (startX && endX) {
+    grabcut(Math.min(startX, endX), Math.min(startY, endY), 
+            Math.max(startX, endX), Math.max(startY, endY));
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  grabcut(Math.min(startX, mouseX - startX), Math.min(startY, mouseY - startY), 
-          Math.max(startX, mouseX - startX), Math.max(startY, mouseY - startY));
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+    startX = undefined;
+    startY = undefined;
+    endX = undefined;
+    endY = undefined;
+  }
 }, false);
