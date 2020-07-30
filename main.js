@@ -114,8 +114,8 @@ canvas.addEventListener('touchstart', function(e) {
   bound = canvas.getBoundingClientRect();
 	startX = e.touches[0].clientX - bound.left;
 	startY = e.touches[0].clientY - bound.top;
-  endX = e.touches[0].clientX - bound.left;
-	endY = e.touches[0].clientY - bound.top;
+  endX = e.touches[1].clientX - bound.left;
+	endY = e.touches[1].clientY - bound.top;
 }, false);
 canvas.addEventListener('touchend', function(e) {
   isDrawing = false;
