@@ -119,7 +119,8 @@ canvas.addEventListener('touchstart', function(e) {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath();
-  ctx.rect(startX, startY, endX, endY);
+  ctx.rect(Math.min(startX, endX), Math.min(startY, endY), 
+           Math.max(startX, endX), Math.max(startY, endY));
   ctx.stroke();
 }, false);
 canvas.addEventListener('touchmove', function(e) {
@@ -131,7 +132,8 @@ canvas.addEventListener('touchmove', function(e) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
-    ctx.rect(startX, startY, endX, endY);
+    ctx.rect(Math.min(startX, endX), Math.min(startY, endY), 
+             Math.max(startX, endX), Math.max(startY, endY));
     ctx.stroke();
 	}
 }, false);
