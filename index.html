@@ -31,32 +31,45 @@
     <div class="front">figur</div>
     <div class="back">text</div>
   </div>
-  
-  <div class="buttons">
-    Upload a photo: 
-    <input type="file" id="file" name="file" disabled />
+
+  <div class="ui-section">
+    Upload a photo: <input type="file" id="file" name="file" disabled />
   </div>
-  <!-- <div class="buttons">
+  
+  <div class="ui-section">
+    <textarea id="textbox" cols="35" rows="5" oninput="update_text()">สักวาหวานอื่นมีหมื่นแสน ไม่เหมือนแม้นพจมานที่หวานหอม กลิ่นประเทียบเปรียบดวงพวงพะยอม อาจจะน้อมจิตโน้มด้วยโลมลมแม้นล้อลามหยามหยาบไม่ปลาบปลื้ม ดังดูดดื่มบอระเพ็ดต้องเข็ดขม ผู้ดีไพร่ไม่ประกอบชอบอารมณ์ ใครฟังลมเมินหน้าระอาเอย</textarea>
+    <!-- เมื่อจะตาย ก็ขออย่าให้ตายอย่างโง่ ๆ อย่างบ้า ๆ คือตายในสงครามที่คนอื่นก่อให้เกิดขึ้น ตายในสงครามกลางเมือง ตายเพราะอุบัติเหตุรถยนต์ ตายเพราะน้ำหรืออากาศเป็นพิษ หรือตายเพราะการเมืองเป็นพิษ -->
+    <!-- I have a dream that one day this nation will rise up and live out the true meaning of its creed: We hold these truths to be self-evident, that all men are created equal. -->
+    <!-- ราษฎรทั้งหลายพึงรู้เถิดว่า ประเทศเรานี้เป็นของราษฎร ไม่ใช่ของกษัตริย์ตามที่เขาหลอกลวง -->
+    <!-- i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am  -->
+  </div>
+
+  <div class="ui-section">
+    text size: 10 <input type="range" id="size" value="4" min="1" max="10" step="0.1" oninput="update_size()" /> 100px
+  </div>
+
+  <!-- <div class="ui-section">
     Choose an option: 
     <div class="button noselect" onclick="update('grabcut')">GrabCut</div> -->
     <!-- <div class="button noselect" onclick="update('removebg')">remove.bg</div>
     <div class="button noselect" onclick="update('bodypix')">bodypix</div>
     <div class="button noselect" onclick="update('maskrcnn')">Mask RCNN</div> -->
   <!-- </div> -->
-  <div class="buttons">
+
+  <div class="ui-section">
     By default, 25% left and right of the photo are considered as background. Click and drag to select the area to pull the foreground out over the text. (All pixels outside of the rectangle are considered as background.) 
   </div>
+
   <img id="image" />
 
   <div id="output">
     <canvas id="background"></canvas>
-    <div id="text">สักวาหวานอื่นมีหมื่นแสน ไม่เหมือนแม้นพจมานที่หวานหอม กลิ่นประเทียบเปรียบดวงพวงพะยอม อาจจะน้อมจิตโน้มด้วยโลมลมแม้นล้อลามหยามหยาบไม่ปลาบปลื้ม ดังดูดดื่มบอระเพ็ดต้องเข็ดขม ผู้ดีไพร่ไม่ประกอบชอบอารมณ์ ใครฟังลมเมินหน้าระอาเอย</div>
-    <!-- <div id="text">i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am i run therefore i am </div> -->
+    <div id="text"></div>
     <canvas id="foreground"></canvas>
     <canvas id="ui"></canvas>
   </div>
 
-  <!-- <div class="buttons center">
+  <!-- <div class="ui-section center">
     Code at <a href="https://github.com/puripant/figur-over-text">GitHub</a>
     <br>
 		Created by

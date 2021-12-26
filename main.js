@@ -1,6 +1,19 @@
 const maxWidth = 500;
 const scaling = 2;
 
+let text = document.getElementById('text');
+let textbox = document.getElementById('textbox');
+function update_text() {
+  text.innerText = textbox.value;
+}
+update_text();
+
+let size_slider = document.getElementById('size');
+function update_size() {
+  text.style.fontSize = size_slider.value + 'em';
+}
+update_size();
+
 let option = 'grabcut';
 let input, src, dst, dst2;
 let width, height;
