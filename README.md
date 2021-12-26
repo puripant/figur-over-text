@@ -1,7 +1,7 @@
 # figur over text
 Prototype of image/figure foreground over custom text
 
-<img src="thumbnail.png" width="300" />
+<img src="screenshot.png" width="300" />
 
 ## TODO
 Add new libraries such as
