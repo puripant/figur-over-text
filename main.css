@@ -22,6 +22,15 @@ body {
   opacity: 0.5;
   z-index: -1;
 }
+.logo-group {
+  margin: -6.9em auto 0 auto;
+  left: 6em;
+  position: relative;
+  width: 50px;
+  font-family: sans-serif;
+  font-size: 10px;
+  text-align: right;
+}
 
 img {
   display: none;
@@ -90,6 +99,9 @@ input#file {
 .center {
 	text-align: center;
 }
+.small {
+  font-size: 1em;
+}
 .logo {
   position: relative;
   display: inline-block;
@@ -98,7 +110,7 @@ input#file {
   vertical-align: middle;
   background-size: cover;
   background-repeat:no-repeat;
-  background-position: center center;
+  background-position: top left -12px;
 }
 .logo a span {
   position: absolute;
@@ -110,6 +122,6 @@ input#file {
 }
 .boonmeelab {
   background-image: url('logo_boonmeelab.png');
-  width: 150px;
-  margin: 0 -10px;
+  width: 26px;
+  margin-bottom: -2px;
 }

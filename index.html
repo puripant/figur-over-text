@@ -30,6 +30,10 @@
   <div class="header">
     <div class="front">figur</div>
     <div class="back">text</div>
+    <div class="logo-group">
+      <div class="logo boonmeelab"><a href="https://www.boonmeelab.com"><span></span></a></div><br />
+      <a href="https://github.com/puripant/figur-over-text">GitHub</a>
+    </div>
   </div>
 
   <div class="ui-section">
@@ -56,7 +60,7 @@
     <div class="button noselect" onclick="update('maskrcnn')">Mask RCNN</div> -->
   <!-- </div> -->
 
-  <div class="ui-section">
+  <div class="ui-section small">
     By default, 25% left and right of the photo are considered as background. Click and drag to select the area to pull the foreground out over the text. (All pixels outside of the rectangle are considered as background.) 
   </div>
 
@@ -67,13 +71,6 @@
     <div id="text"></div>
     <canvas id="foreground"></canvas>
     <canvas id="ui"></canvas>
-  </div>
-
-  <div class="ui-section center">
-    Code at <a href="https://github.com/puripant/figur-over-text">GitHub</a>
-    <br>
-		Created by
-    <div class="logo boonmeelab"><a href="https://www.boonmeelab.com"><span></span></a></div>
   </div>
 
   <script async src="opencv.js" onload="onOpenCvReady();" type="text/javascript"></script>
