@@ -143,11 +143,16 @@ function drag_move(e) {
     let xy = ('clientX' in e) ? e : e.touches[0];
 
 		mouseX = xy.clientX - bound.left;
-		mouseY = xy.clientY - bound.top;				
+		mouseY = xy.clientY - bound.top;
+
+    let x = startX / bound.width * canvas.width
+    let y = startY / bound.height * canvas.height
+    let w = (mouseX - startX) / bound.width * canvas.width
+    let h = (mouseY - startY) / bound.height * canvas.height
 		
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
-		ctx.rect(startX, startY, mouseX - startX, mouseY - startY);
+		ctx.rect(x, y, w, h);
 		ctx.stroke();
 	}
 
