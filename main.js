@@ -35,8 +35,6 @@ imgElement.onload = () => {
   cv.cvtColor(src, src, cv.COLOR_RGBA2RGB, 0);
 
   update(option);
-
-  src.delete();
 }
 
 let inputElement = document.getElementById('file');
@@ -125,6 +123,11 @@ let ctx = canvas.getContext('2d');
 let isDrawing = false;
 let startX, startY, mouseX, mouseY;
 let bound;
+
+canvas.addEventListener("touchstart",  function(event) {event.preventDefault()})
+canvas.addEventListener("touchmove",   function(event) {event.preventDefault()})
+canvas.addEventListener("touchend",    function(event) {event.preventDefault()})
+canvas.addEventListener("touchcancel", function(event) {event.preventDefault()})
 
 canvas.addEventListener('mousedown', function(e) {
   isDrawing = true;
