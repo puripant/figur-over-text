@@ -35,6 +35,8 @@ imgElement.onload = () => {
   cv.cvtColor(src, src, cv.COLOR_RGBA2RGB, 0);
 
   update(option);
+
+  src.delete();
 }
 
 let inputElement = document.getElementById('file');
@@ -45,6 +47,8 @@ inputElement.addEventListener('change', (e) => {
 function update(option) {
   switch(option) {
     case 'grabcut':
+      // let face = detect_face();
+      // console.log(face.x, face.y, face.width, face.height);
       grabcut(0.25*width, 0, 0.5*width, height);
       break;
     case 'removebg': break;
@@ -53,6 +57,31 @@ function update(option) {
     default: break;
   }
 }
+
+// const faceCascadeFile = 'haarcascade_frontalface_default.xml';
+// let faceCascade;
+// function detect_face() {
+//   let gray = new cv.Mat();
+//   cv.cvtColor(src, gray, cv.COLOR_RGBA2GRAY, 0);
+//   let faces = new cv.RectVector();
+//   let msize = new cv.Size(0, 0);
+//   faceCascade.detectMultiScale(gray, faces, 1.1, 3, 0, msize, msize);
+//   let face_max;
+//   let face_area_max = 0;
+//   for (let i = 0; i < faces.size(); i++) {
+//     let face = faces.get(i);
+//     if (face.width * face.height > face_area_max) {
+//       face_area_max = face.width * face.height;
+//       face_max = face;
+//     }
+//   }
+
+//   gray.delete();
+//   faces.delete();
+
+//   return face_max;
+// }
+
 function grabcut(a, b, w, h) {
   let mask = new cv.Mat();
   let bgdModel = new cv.Mat();
@@ -82,6 +111,12 @@ function grabcut(a, b, w, h) {
 
 function onOpenCvReady() {
   inputElement.disabled = false;
+  
+  // let utils = new Utils('errorMessage');
+  // faceCascade = new cv.CascadeClassifier();
+  // utils.createFileFromUrl(faceCascadeFile, faceCascadeFile, () => {
+  //   faceCascade.load(faceCascadeFile);
+  // });
 }
 
 let canvas = document.getElementById('ui');
