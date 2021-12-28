@@ -124,10 +124,10 @@ let isDrawing = false;
 let startX, startY, mouseX, mouseY;
 let bound;
 
-canvas.addEventListener("touchstart",  function(event) {event.preventDefault()})
-canvas.addEventListener("touchmove",   function(event) {event.preventDefault()})
-canvas.addEventListener("touchend",    function(event) {event.preventDefault()})
-canvas.addEventListener("touchcancel", function(event) {event.preventDefault()})
+// canvas.addEventListener("touchstart",  function(e) { e.preventDefault() })
+canvas.addEventListener("touchmove",   function(e) { e.preventDefault() })
+// canvas.addEventListener("touchend",    function(e) { e.preventDefault() })
+canvas.addEventListener("touchcancel", function(e) { e.preventDefault() })
 
 canvas.addEventListener('mousedown', function(e) {
   isDrawing = true;
@@ -172,6 +172,8 @@ canvas.addEventListener('touchstart', function(e) {
 	  startX = e.touches[0].clientX - bound.left;
 	  startY = e.touches[0].clientY - bound.top;
   }
+  
+  e.preventDefault()
 }, false);
 canvas.addEventListener('touchend', function(e) {
   if (startX && endX) {
@@ -184,4 +186,6 @@ canvas.addEventListener('touchend', function(e) {
     endX = undefined;
     endY = undefined;
   }
+
+  e.preventDefault()
 }, false);
