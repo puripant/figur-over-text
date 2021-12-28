@@ -5,14 +5,14 @@ let text = document.getElementById('text');
 let textbox = document.getElementById('textbox');
 function update_text() {
   text.innerText = textbox.value;
+  adjust_height();
 }
-update_text();
 
 let size_slider = document.getElementById('size');
 function update_size() {
   text.style.fontSize = size_slider.value + 'em';
+  adjust_height();
 }
-update_size();
 
 let option = 'grabcut';
 let input, src, dst, dst2;
@@ -54,6 +54,8 @@ function update(option) {
     case 'maskrcnn': break;
     default: break;
   }
+
+  adjust_height();
 }
 
 // const faceCascadeFile = 'haarcascade_frontalface_default.xml';
@@ -171,3 +173,12 @@ canvas.addEventListener("touchstart", drag_start, false);
 canvas.addEventListener("touchmove", drag_move, false);
 canvas.addEventListener("touchend", drag_end, false);
 canvas.addEventListener("touchcancel", drag_end, false);
+
+// adjust the height of the container div
+let output = document.getElementById('output');
+function adjust_height() {
+  output.style.height = Math.max(canvas.height, text.offsetHeight) + 'px';
+}
+
+update_text();
+update_size();
