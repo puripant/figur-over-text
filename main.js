@@ -124,68 +124,50 @@ let isDrawing = false;
 let startX, startY, mouseX, mouseY;
 let bound;
 
-// canvas.addEventListener("touchstart",  function(e) { e.preventDefault() })
-canvas.addEventListener("touchmove",   function(e) { e.preventDefault() })
-// canvas.addEventListener("touchend",    function(e) { e.preventDefault() })
-canvas.addEventListener("touchcancel", function(e) { e.preventDefault() })
-
-canvas.addEventListener('mousedown', function(e) {
+function drag_start(e) {
   isDrawing = true;
-  canvas.style.cursor = 'crosshair';		
+  canvas.style.cursor = 'crosshair';
+
+  let xy = ('clientX' in e) ? e : e.touches[0];
 
   bound = canvas.getBoundingClientRect();
-	startX = e.clientX - bound.left;
-	startY = e.clientY - bound.top;
-}, false);
-canvas.addEventListener('mousemove', function(e) {
+	startX = xy.clientX - bound.left;
+	startY = xy.clientY - bound.top;
+
+  e.preventDefault();
+}
+function drag_move(e) {
   if (isDrawing) {
-		mouseX = e.clientX - bound.left;
-		mouseY = e.clientY - bound.top;				
+    let xy = ('clientX' in e) ? e : e.touches[0];
+
+		mouseX = xy.clientX - bound.left;
+		mouseY = xy.clientY - bound.top;				
 		
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		ctx.beginPath();
 		ctx.rect(startX, startY, mouseX - startX, mouseY - startY);
 		ctx.stroke();
 	}
-}, false);
-canvas.addEventListener('mouseup', function(e) {
+
+  e.preventDefault();
+}
+function drag_end(e) {
   isDrawing = false;
 	canvas.style.cursor = 'default';
 
   grabcut(Math.min(startX, mouseX - startX), Math.min(startY, mouseY - startY), 
           Math.max(startX, mouseX - startX), Math.max(startY, mouseY - startY));
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-}, false);
 
-let endX, endY;
-canvas.addEventListener('touchstart', function(e) {	
-  bound = canvas.getBoundingClientRect();
-  if (startX) {
-    endX = e.touches[0].clientX - bound.left;
-	  endY = e.touches[0].clientY - bound.top;
+  e.preventDefault();
+}
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-		ctx.beginPath();
-		ctx.rect(startX, startY, endX - startX, endY - startY);
-		ctx.stroke();
-  } else {
-	  startX = e.touches[0].clientX - bound.left;
-	  startY = e.touches[0].clientY - bound.top;
-  }
-  
-  e.preventDefault()
-}, false);
-canvas.addEventListener('touchend', function(e) {
-  if (startX && endX) {
-    grabcut(Math.min(startX, endX), Math.min(startY, endY), 
-            Math.max(startX, endX), Math.max(startY, endY));
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+canvas.addEventListener('mousedown', drag_start, false);
+canvas.addEventListener('mousemove', drag_move, false);
+canvas.addEventListener('mouseup', drag_end, false);
+canvas.addEventListener('mouseout', drag_end, false);
 
-    startX = undefined;
-    startY = undefined;
-    endX = undefined;
-    endY = undefined;
-  }
-
-  e.preventDefault()
-}, false);
+canvas.addEventListener("touchstart", drag_start, false);
+canvas.addEventListener("touchmove", drag_move, false);
+canvas.addEventListener("touchend", drag_end, false);
+canvas.addEventListener("touchcancel", drag_end, false);
